@@ -164,7 +164,7 @@ export default function NoteTakers({
 
                           return item;
                         }));
-                        setIsEdit(prev => prev = null);
+                        setIsEdit(null);
                       }
 
                       if (isEdit !== null && isEdit !== index) {

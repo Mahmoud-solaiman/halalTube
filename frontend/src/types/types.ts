@@ -10,24 +10,24 @@ export type DiscType = {
 }
 
 export type HomeProps = {
-  setTranslate(value: boolean | ((value: boolean) => boolean)): void;
+  setTranslate: React.Dispatch<React.SetStateAction<boolean>>;
   translate: boolean;
   menuContainer: RefObject<HTMLDivElement | null>;
   discs: DiscType[];
-  setDiscs(value: DiscType[]): void;
-  handleErrorMessage(value: string): void;
-  setWatchTitle(value: string): void;
-  setPoster(value: string): void;
+  setDiscs: React.Dispatch<React.SetStateAction<DiscType[]>>;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
+  setWatchTitle: React.Dispatch<React.SetStateAction<string>>;
+  setPoster: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export type SearchProps = {
   isChannel: boolean;
-  setIsSuggestions(value: boolean): void;
-  setPopUpChannelLogo(value: PopUpChannelLogo): void;
-  setSearchHistory(value: SearchHistory[]): void;
+  setIsSuggestions: React.Dispatch<React.SetStateAction<boolean>>;
+  setPopUpChannelLogo: React.Dispatch<React.SetStateAction<PopUpChannelLogo>>
+  setSearchHistory: React.Dispatch<React.SetStateAction<SearchHistory[]>>
   searchText: string;
-  setSearchText(value: string): void;
-  fetchChannelsData(value: unknown): void;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>
+  fetchChannelsData(value: string): Promise<void>;
   searchField: RefObject<HTMLInputElement | null>;
   translate: boolean;
 }
@@ -38,16 +38,16 @@ export type SearchHistory = {
 }
 
 export type HeaderProps = {
-  setVideos(value: unknown): void;
+  setVideos: React.Dispatch<React.SetStateAction<VideosDetails>>;
   setChannelVideos(value: unknown): void;
   setChannelsLogos(value: unknown): void;
   setTranslate(value: boolean): void;
   menuContainer: RefObject<HTMLDivElement | null>;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   setIsChannel(value: boolean): void;
   isChannel: boolean;
   popUpChannelLogo: PopUpChannelLogo;
-  setPopUpChannelLogo(value: PopUpChannelLogo): void;
+  setPopUpChannelLogo: React.Dispatch<React.SetStateAction<PopUpChannelLogo>>
   setChannelLogo(value: unknown): void;
   setWatchTitle(value: string): void;
   setIsLoading(value: boolean): void;
@@ -104,7 +104,7 @@ export type SidePanelProps = {
   menuContainer: RefObject<HTMLDivElement | null>;
   discs: DiscType[];
   setDiscs(value: DiscType[]): void;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   isDarkMode: boolean;
   setIsDarkMode(value: boolean): void;
   setWatchTitle(value: string): void;
@@ -116,7 +116,7 @@ export type DiscProps = {
   discId: string;
   setDiscs(value: DiscType[]): void;
   deleteConfirmationRef: RefObject<HTMLElement | null>
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   discObject: DiscType;
   setWatchTitle(value: string): void;
   discs: DiscType[];
@@ -144,7 +144,7 @@ type ChannelsLogos = {
   }]
 }
 
-type VideosDetails = {
+export type VideosDetails = {
   items: [{
     id: string;
     snippet: {
@@ -187,21 +187,21 @@ export type VideoResponse = {
 
 export type VideoGridProps = {
   channelLogo: ChannelsLogos;
-  videos: VideosDetails;
+  videos: VideosDetails | {};
   setDiscs(value: DiscType[]): void;
   setTranslate(value: boolean): void;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   setPoster(value: string): void;
   discs: DiscType[];
 }
 
 export type ActionsProps = {
-  setOpenDisc(value: number | null): void;
+  setOpenDisc(value: number | null | ((value: number |  null) => number | null)): void;
   index: number;
   actionsContainerRef: RefObject<HTMLElement | null>;
   setOpenNewAdder(value: number | null): void;
   isOpenTop: boolean;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   setOpenIndex(value: number | undefined): void;
   url: string;
 }
@@ -209,9 +209,11 @@ export type ActionsProps = {
 export type DiscsActionsProps = {
   discsContainerRef: RefObject<HTMLElement | null>;
   videoId: string;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   setOpenDisc(value: number | null): void;
   setOpenIndex(value: number | undefined): void;
+  setOpenNewAdder: React.Dispatch<React.SetStateAction<number | null>>;
+  index: number;
   isOpenTop: boolean;
   setDiscs(value: DiscType[]): void;
   discs: DiscType[];
@@ -222,14 +224,14 @@ export type AddNewDiscProps = {
   setOpenIndex(value: number | undefined): void;
   setOpenNewAdder(value: number | null): void;
   setTranslate(value: boolean): void;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   videoId: string;
   isOpenTop: boolean;
 }
 
 export type SavedVideosProps = {
   setTranslate(value: boolean): void;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   setPoster(value: string): void;
   savedVideosDetails: SavedVideosDetails[] | undefined;
   setSavedVideosDetails(value: SavedVideosDetails[] | ((value: SavedVideosDetails[] | undefined) => SavedVideosDetails[] | undefined)): void;
@@ -300,7 +302,7 @@ export type SavedVideosPanelProps = {
 export type SavedVideosGridProps = {
   savedVideosDetails: SavedVideosDetails[] | undefined;
   setSavedVideosDetails(value: SavedVideosDetails[] | ((value: SavedVideosDetails[] | undefined) => SavedVideosDetails[] | undefined)): void;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   setPoster(value: string): void;
   layout: 'saved-videos' | 'watch-panel';
   videos: string[];
@@ -317,7 +319,7 @@ export type SavedVideosControlsProps = {
   targetIndex: number;
   setOpenDiscs(value: number | null): void;
   discsRef: RefObject<HTMLDivElement | null>;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   videos: string[];
   setVideos(value: string[]): void;
   url: string;
@@ -328,34 +330,34 @@ export type DiscsControlsProps = {
   videoId: string;
   setOpenControls(value: number | null): void;
   setOpenDiscs(value: number | null): void;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
 }
 
 export type WatchProps = Omit<SavedVideosGridProps, 'setVideos' | 'setDiscName' | 'setTranslate' | 'setIsSpinner' | 'setSubDiscs' | 'subDiscs'> & {
   setTranslate(value: boolean): void;
   menuContainer: RefObject<HTMLDivElement | null>
   setDiscs(value: DiscType[]): void;
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   watchTitle: string;
   poster: string;
   setVideos(value: string[]): void;
 }
 
 export type WatchPanelProps = Omit<SavedVideosGridProps, 'subDiscs' | 'setSubDiscs'> & {
-  setDiscs(value: DiscType[]): void;
+  setDiscs: React.Dispatch<React.SetStateAction<DiscType[]>>;
 };
 
 export type ControlsProps = {
   isBlur: boolean;
-  setIsBlur(value: boolean): void;
+  setIsBlur: React.Dispatch<React.SetStateAction<boolean>>;
   isShowControls: boolean;
   hideControls?(): void;
   isSettings: boolean;
   isSpeedSettings: boolean;
   isNoteTakers: boolean;
-  setIsSettings(value: boolean): void;
-  setIsSpeedSettings(value: boolean): void;
-  setIsNoteTakers(value: boolean): void;
+  setIsSettings: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSpeedSettings: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsNoteTakers: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type Location = {
@@ -370,43 +372,43 @@ export type NextPrayer = {
 }
 
 export type VideoPlayerSettingsProps = {
-  setIsSpeedSettings(value: boolean): void;
-  setIsSettings(value: boolean): void;
-  setBlurBoxes(value: string[]): void;
+  setIsSpeedSettings: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSettings: React.Dispatch<React.SetStateAction<boolean>>;
+  setBlurBoxes: React.Dispatch<React.SetStateAction<string[]>>;
   blurBoxes: string[];
-  setIsNoteTakers(value: boolean): void;
+  setIsNoteTakers: React.Dispatch<React.SetStateAction<boolean>>;
 } 
 
 export type PlaySpeedControlsProps = Omit<VideoPlayerSettingsProps, 'setBlurBoxes' | 'blurBoxes' | 'setIsNoteTakers'>;
 
 export type BlurBoxProps = {
   blurBoxes: string[];
-  setBlurBoxes(value: string[]): void;
+  setBlurBoxes: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export type NoteTakersProps = {
-  setIsNoteTakers(value: boolean): void;
-  setIsSettings(value: boolean): void;
-  setNotes(value: NoteTakerType[]): void;
+  setIsNoteTakers: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSettings: React.Dispatch<React.SetStateAction<boolean>>;
+  setNotes: React.Dispatch<React.SetStateAction<NoteTakerType[]>>;
   notes: NoteTakerType[];
-  setNoteTakers(value: NoteTakerType[] | ((value: NoteTakerType[]) => NoteTakerType[])): void;
+  setNoteTakers: React.Dispatch<React.SetStateAction<NoteTakerType[]>>;
   noteTakers: NoteTakerType[];
 }
 
 export type NoteProps = {
   note: NoteTakerType;
   notes: NoteTakerType[];
-  setNotes(value: NoteTakerType[]): void;
-  setNoteTakers(value: NoteTakerType[]): void;
+  setNotes: React.Dispatch<React.SetStateAction<NoteTakerType[]>>;
+  setNoteTakers: React.Dispatch<React.SetStateAction<NoteTakerType[]>>;
   noteTakers: NoteTakerType[];
 }
 
 export type NoteColorsProps = {
   noteRef: RefObject<HTMLElement | null>;
-  setIsNoteColors(value: boolean): void;
+  setIsNoteColors: React.Dispatch<React.SetStateAction<boolean>>;
   noteId: string;
   noteTakers: NoteTakerType[];
-  setNoteTakers(value: NoteTakerType[]): void;
+  setNoteTakers: React.Dispatch<React.SetStateAction<NoteTakerType[]>>;
 }
 
 export type NoteTakerResponse = {
@@ -429,7 +431,7 @@ export type NoteTakerType = {
 }
 
 export type AuthenticationProps = {
-  handleErrorMessage(value: string): void;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   layout: 'register' | 'login';
 }
 
@@ -459,7 +461,7 @@ export type SingleDiscResponse = {
 }
 
 export type SettingsProps = {
-  setIsSettings(value: boolean): void;
+  setIsSettings: React.Dispatch<React.SetStateAction<boolean>>;
   settingsBtnRef: RefObject<SVGSVGElement | null>;
 }
 
@@ -468,16 +470,16 @@ export interface SubDiscProps extends React.ComponentPropsWithoutRef<"div">{
   videosCount: number;
   id: string;
   latestVideo: string;
-  setSubDiscs(value: DiscType[] | ((value: DiscType[]) => DiscType[])): void;
-  handleErrorMessage(value: string): void;
+  setSubDiscs: React.Dispatch<React.SetStateAction<DiscType[]>>;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
 }
 
 export interface NewSubDiscProps {
-  setIsAddSubdisc?(value: boolean | ((value: boolean) => boolean)): void;
-  setSubDiscs(value: DiscType[] | ((value: DiscType[]) => DiscType[])): void;
-  handleErrorMessage(value: string): void;
+  setIsAddSubdisc?: React.Dispatch<React.SetStateAction<boolean>>;
+  setSubDiscs: React.Dispatch<React.SetStateAction<DiscType[]>>;
+  handleErrorMessage(message: string, isSuccess?: boolean): void;
   type: 'new' | 'edit';
-  setIsEditSubdisc?(value: boolean): void;
+  setIsEditSubdisc?: React.Dispatch<React.SetStateAction<boolean>>;
   subdiscId?: string;
   currentName?: string;
 }
@@ -487,9 +489,9 @@ export type SingleSubdiscResponse = Omit<SubDiscsResponse, 'discs'> & {
 } 
 
 export interface SubDiscControlsProps {
-  setIsControls(value: boolean): void;
+  setIsControls: React.Dispatch<React.SetStateAction<boolean>>;
   controlsBtnRef: RefObject<HTMLDivElement | null>;
   subdiscId: string;
-  setSubDiscs(value: DiscType[] | ((value: DiscType[]) => DiscType[])): void;
-  setIsEditSubdisc(value: boolean): void;
+  setSubDiscs: React.Dispatch<React.SetStateAction<DiscType[]>>;
+  setIsEditSubdisc: React.Dispatch<React.SetStateAction<boolean>>;
 }

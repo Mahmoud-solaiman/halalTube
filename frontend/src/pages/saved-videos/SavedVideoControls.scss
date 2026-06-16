@@ -26,6 +26,15 @@
       background-color: var(--primary-color-transparent);
     }
 
+    &:first-child:active {
+      background-color: var(--red-color-danger-hover);
+      color: var(--red-color-danger);
+
+      svg {
+        fill: var(--red-color-danger);
+      }
+    }
+
 
     @media (hover: hover) {
       &:hover {
@@ -77,7 +86,7 @@
     .control:not(:last-of-type) {
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
-      border-bottom: 1px solid var(--dim-gray);
+      border-bottom: 1px solid var(--primary-color-transparent);
     }
   }
 }

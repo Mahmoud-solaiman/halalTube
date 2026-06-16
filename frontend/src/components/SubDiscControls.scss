@@ -18,9 +18,16 @@
     padding: .3em .2em;
     border-radius: 7px;
 
-    &:hover {
+    &:active {
       background-color: var(--primary-color-transparent);
     }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--primary-color-transparent);
+      }
+    }
+    
     svg {
       width: 20px;
       fill: var(--text-color);
@@ -64,7 +71,7 @@
     .control:not(:last-of-type) {
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
-      border-bottom: 1px solid var(--dim-gray);
+      border-bottom: 1px solid var(--primary-color-transparent);
     }
     
     .control {

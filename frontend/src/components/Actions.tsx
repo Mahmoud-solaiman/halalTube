@@ -22,7 +22,16 @@ export function Actions({
         }}
         onPointerUp={e => {
           e.stopPropagation();
-          setOpenDisc(index);
+          if (e.pointerType === 'touch') {
+            setOpenDisc(() => index);
+            setOpenIndex(undefined);
+            return;
+          }
+          console.log('hi');
+          setOpenDisc(prev => {
+            if (Number.isFinite(prev)) return null;
+            return index;
+          });
           setOpenNewAdder(null);
         }}
       >

@@ -59,7 +59,6 @@ export function Header({
           }
         });
   
-        console.log('hello');
         setIsLoadingChannels(false);
         // Then we set the response to that final result to be used to render the channels visually in the suggestions popup
         setPopUpChannelLogo(channelInfo.data.data);

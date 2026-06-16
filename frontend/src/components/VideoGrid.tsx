@@ -150,7 +150,7 @@ export function VideoGrid({
                   />
                 }
                 {
-                  (openDisc === index && openIndex === index) &&
+                  (openDisc === index) &&
                   // The DiscsActions component
                   <DiscsActions
                     discsContainerRef={discsContainerRef}
@@ -158,6 +158,8 @@ export function VideoGrid({
                     handleErrorMessage={handleErrorMessage}
                     setOpenDisc={setOpenDisc}
                     setOpenIndex={setOpenIndex}
+                    setOpenNewAdder={setOpenNewAdder}
+                    index={index}
                     isOpenTop={isOpenTop}
                     setDiscs={setDiscs}
                     discs={discs}

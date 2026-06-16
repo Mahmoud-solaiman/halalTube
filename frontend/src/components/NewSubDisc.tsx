@@ -27,7 +27,7 @@ export default function NewSubDisc({
 
       setSubDiscs(prev => [...prev, newSubdisc.data.disc]);
       if (setIsAddSubdisc) setIsAddSubdisc(false);
-      handleErrorMessage('Subdisc has been created successfully');
+      handleErrorMessage('Subdisc has been created successfully', true);
 
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || "Something went wrong";

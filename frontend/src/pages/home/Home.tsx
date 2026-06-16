@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"; // Import these hooks from the react package
 import { Header } from "../../components/Header.tsx"; // Import the header component
 import LoadingVideos from "../../components/UI/LoadingVideos.tsx";
-import type { HomeProps } from  "../../types/types.ts";
+import { VideosDetails, type HomeProps } from  "../../types/types.ts";
 import { VideoGrid } from "../../components/VideoGrid.js";
 
 export function Home({
@@ -20,7 +20,7 @@ export function Home({
   const channelLogoStorage = sessionStorage.getItem('channel-logo');
   const channelsLogosStorage = sessionStorage.getItem('channels-logos');
   const [ channelVideos, setChannelVideos ] = useState(channelVideosStorage ? JSON.parse(channelVideosStorage) : {}); // The videos for a specific channels returned from the channel filter
-  const [ videos, setVideos ] = useState(videosStorage ? JSON.parse(videosStorage) : {}); // Videos returned from the video filter
+  const [ videos, setVideos ] = useState<VideosDetails | {}>(videosStorage ? JSON.parse(videosStorage) : {}); // Videos returned from the video filter
   const [ popUpChannelLogo, setPopUpChannelLogo ] = useState({}); // State for the logos of the search popup
   const [ channelLogo, setChannelLogo ] = useState(channelLogoStorage ? JSON.parse(channelLogoStorage) : {}); // Channel logo of the channel filter
   const [ channelsLogos, setChannelsLogos ] = useState(channelsLogosStorage ? JSON.parse(channelsLogosStorage) : {}); //Logo of the picked channel
@@ -34,7 +34,7 @@ export function Home({
     });
 
     window.addEventListener('online', () => {
-      handleErrorMessage("Back online");
+      handleErrorMessage("Back online", true);
     });
 
     window.addEventListener('load', () => {

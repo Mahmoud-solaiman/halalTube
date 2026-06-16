@@ -25,7 +25,7 @@ export function AddNewDisc({
       setOpenIndex(undefined);
       setTranslate(true);
       setOpenNewAdder(null);
-      handleErrorMessage('Disc added successfully');
+      handleErrorMessage('Disc was added successfully', true);
     } catch (error: any) {
       handleErrorMessage(error.response?.data?.message);
     }
@@ -46,7 +46,6 @@ export function AddNewDisc({
     >
       <input
         autoComplete="off"
-        autoFocus
         type="text"
         name="new-disc-adder"
         id="new-disc-adder-input"

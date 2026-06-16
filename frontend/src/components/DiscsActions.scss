@@ -2,20 +2,86 @@
   position: absolute;
   background-color: var(--suggestions-bg);
   box-shadow: 3px 3px 10px black;
-  top:105px;
-  right:30%;
+  top: 105px;
+  right: 30%;
   z-index: 100;
-  padding:.3em 0;
-  width:200px;
-  font-size:1.2rem;
-  font-weight:600;
+  padding-block: .2em;
+  width: 200px;
+  max-height: 150px;
+  font-size: 1.2rem;
+  font-weight: 600;
   border-radius: 5px;
-  animation: discs .1s;
+  animation: discs .1s linear;
+  display: grid;
+  grid-template-columns: 100%;  
+  grid-template-rows: 1fr 30px;  
+  
+  .discs-actions-parent {
+    width: 100%;
+    overflow: auto;
+    border-bottom: 1px solid var(--primary-color-transparent);
+    margin-block-end: .4rem;
+    
+    &::-webkit-scrollbar {
+      background-color: transparent;
+      width: 5px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--primary-color-transparent);
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
+  button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    justify-self: center;
+    width: 95%;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .2rem;
+    cursor: pointer;
+    transition: .15s linear;
+    box-shadow: 0 3px 0 -1px rgb(14, 214, 121);
+
+    svg {
+      width: 20px;
+      fill: #fff;
+    }
+    
+    &:active {
+      opacity: .9;
+      transform: translateY(3%);
+      box-shadow: 0 1px 0 rgb(14, 214, 121);
+    }
+    
+    @media (hover: hover) {
+      &:hover {
+        opacity: .9;
+        transform: translateY(3%);
+        box-shadow: 0 1px 0 rgb(0, 78, 42);        
+      }
+    }
+  }
 }
 
 .discs-actions-container.open-top {
-  bottom:150px;
-  top:auto;
+  bottom: 150px;
+  top: auto;
+}
+
+@media (max-width: 400px) {
+  .discs-actions-container,
+  .discs-actions-container.open-top {
+    position: fixed;
+    inset: auto 20px 10px 30px;
+    width: auto;
+  }
 }
 
 .discs-actions-container.empty {
@@ -23,11 +89,20 @@
 }
 
 .disc-actions {
-  padding: .3em .4em;
+  padding: .2em .4em;
   border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  fill: #fff;
 
-  &:hover {
+  &:active {
     background-color: var(--primary-color-transparent);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--primary-color-transparent);
+    }
   }
 }
 
@@ -35,7 +110,7 @@
   from {
     opacity: 0;
     transform: translateY(100%);
-  }  
+  }
 
   to {
     opacity: 1;

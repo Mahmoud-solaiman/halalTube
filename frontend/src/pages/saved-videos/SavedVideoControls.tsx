@@ -28,7 +28,7 @@ export default function SavedVideoControls({
         videos: updatedVideos
       });
 
-      handleErrorMessage(updatedDisc.data.message);
+      handleErrorMessage(updatedDisc.data.message, true);
       setSavedVideosDetails(savedVideosDetails.filter(video => video.id !== savedVideosDetails[targetIndex].id));
       setOpenControls(null);
       setOpenDiscs(null);

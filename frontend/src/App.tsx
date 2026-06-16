@@ -25,14 +25,16 @@ export default function App() {
   const [poster, setPoster] = useState<string>('');
   const [videos, setVideos] = useState<string[]>([]);
   const [savedVideosDetails, setSavedVideosDetails] = useState<SavedVideosDetails[] | undefined>(undefined);
+  const [ isMessageSuccess, setIsMessageSuccess ] = useState<boolean>(false);
   const navigate = useNavigate();
 
   //Function that handles the rendering and disrendering and the content of the error message
-  function handleErrorMessage(message: string): void {
+  function handleErrorMessage(message: string, isSuccess: boolean): void {
     clearTimeout(showErrorMessage);
     setErrorMessage(message);
     setShowErrorMessage(setTimeout(() => setIsErrorMessage(false), 1400));
     setIsErrorMessage(true);
+    setIsMessageSuccess(isSuccess);
   }
 
   useEffect(() => {
@@ -73,7 +75,7 @@ export default function App() {
     <>
       {
         isErrorMessage &&
-        <ErrorMessage errorMessage={errorMessage} />
+        <ErrorMessage errorMessage={errorMessage} isSuccess={isMessageSuccess} />
       }
       <Activity mode={translate ? "visible" : "hidden"}>
         <SidePanel
