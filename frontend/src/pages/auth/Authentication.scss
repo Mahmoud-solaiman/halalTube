@@ -89,6 +89,18 @@
     }
   }
 
+  .password-reset-link {
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: var(--primary-color);
+    margin-block-start: -.5rem;
+    transition: .15s linear;
+
+    &:hover {
+      color: var(--text-color);
+    }
+  }
+
   .login-navigator-btn {
     font-size: 1.5rem;
     font-weight: 500;

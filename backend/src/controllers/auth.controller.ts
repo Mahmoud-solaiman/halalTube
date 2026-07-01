@@ -24,7 +24,7 @@ export const registerUser = async (req: Request, res: Response) => {
       },
       process.env.JWT_SECRET_KEY as string,
       { expiresIn: '1d'}
-    )
+    );
 
     res.status(201).json({ 
       message: 'User has been registered successfully', 
@@ -35,6 +35,7 @@ export const registerUser = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       message: 'Internal Server Error',
+      success: false,
       error
     })
   }
@@ -76,7 +77,10 @@ export const loginUser = async (req: Request, res: Response) => {
 
   } catch (error) {
     res.status(500).json({
-      message: 'Internal Server Error'
+      message: 'Internal Server Error',
+      success: false,
+      error
     });
   }
 }
+

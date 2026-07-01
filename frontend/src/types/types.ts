@@ -100,7 +100,7 @@ export type SuggestionsProps = {
 }
 
 export type SidePanelProps = {
-  setTranslate(value: boolean): void;
+  setTranslate: React.Dispatch<React.SetStateAction<boolean>>;
   menuContainer: RefObject<HTMLDivElement | null>;
   discs: DiscType[];
   setDiscs(value: DiscType[]): void;
@@ -108,6 +108,10 @@ export type SidePanelProps = {
   isDarkMode: boolean;
   setIsDarkMode(value: boolean): void;
   setWatchTitle(value: string): void;
+}
+
+export interface SidePanelFooterProps {
+  setTranslate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type DiscProps = {
@@ -463,6 +467,7 @@ export type SingleDiscResponse = {
 export type SettingsProps = {
   setIsSettings: React.Dispatch<React.SetStateAction<boolean>>;
   settingsBtnRef: RefObject<SVGSVGElement | null>;
+  setTranslate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface SubDiscProps extends React.ComponentPropsWithoutRef<"div">{
@@ -494,4 +499,19 @@ export interface SubDiscControlsProps {
   subdiscId: string;
   setSubDiscs: React.Dispatch<React.SetStateAction<DiscType[]>>;
   setIsEditSubdisc: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface OneTimePasscodeProps {
+  handleErrorMessage(message: string, isSuccess?: boolean): void;  
+}
+
+export interface PasswordResetProps {
+  handleErrorMessage(message: string, isSuccess?: boolean): void;  
+}
+
+export type APIResponse = {
+  message: string;
+  success: boolean;
+  token?: string;
+  userId?: string;
 }

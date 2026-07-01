@@ -9,6 +9,8 @@ import type { DiscType, SavedVideosDetails } from "./types/types";
 import Authentication from "./pages/auth/Authentication";
 import { ErrorMessage } from "./components/ErrorMessage";
 import { SidePanel } from "./components/SidePanel";
+import OneTimePasscode from "./pages/one-time-passcode/OneTimePasscode";
+import PasswordReset from "./components/PasswordReset";
 
 // The JSX of the App component and the Routes
 export default function App() {
@@ -141,6 +143,16 @@ export default function App() {
           <Authentication
             handleErrorMessage={handleErrorMessage}
             layout="login"
+          />
+        } />
+        <Route path="/oneTimePasscode" element={
+          <OneTimePasscode 
+            handleErrorMessage={handleErrorMessage}
+          />
+        } />
+        <Route path="/passwordReset" element={
+          <PasswordReset
+            handleErrorMessage={handleErrorMessage}
           />
         } />
       </Routes>

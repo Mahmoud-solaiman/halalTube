@@ -1,0 +1,118 @@
+.one-time-passcode-page {
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    padding: 1.5em;
+  }
+  
+  button {
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding-block: .5em;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+
+    @media (hover: hover) {
+      &:hover {
+        opacity: .85;
+      }
+    }
+
+    &:active {
+      opacity: .7;
+    }
+  }
+  
+  & > .otp-sender {
+    h2 {
+      font-size: 2rem;
+    }
+  
+    p {
+      max-width: 55ch;
+      line-height: 1.5rem;
+      font-size: 1.2rem;
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 350px;
+      max-width: 100%;
+  
+      input {
+        height: 45px;
+        font-size: 1.1rem;
+        padding: .4em;
+        border-radius: 5px;
+        min-width: 0px;
+        border: none;
+        color: var(--text-color);
+        background-color: var(--primary-color-transparent);
+  
+        &:focus-within {
+          outline: 2px solid var(--primary-color);
+        }
+  
+        &::placeholder {
+          color: var(--placeholder-color);
+        }
+      }
+  
+    }
+  
+  }
+  
+  & > .otp-digits-container {
+    .otp-message {
+      width: 300px;
+      max-width: 100%;
+      background-color: var(--primary-color-transparent);
+      padding: .5em;
+      border-radius: 5px;
+      position: relative;
+  
+  
+      svg {
+        width: 20px;
+        position: absolute;
+        inset: auto 5px 5px auto;
+        fill: #fff;
+        cursor: pointer;
+        transition: .15s linear;
+        
+        &:hover {
+          fill: var(--primary-color);
+        }
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      div > input {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+        text-align: center;
+        background-color: transparent;
+        border: 1px solid var(--primary-color);
+        border-radius: 5px;
+
+        &:not(:last-child) {
+          margin-inline-end: .5rem;
+        }
+      }
+    }
+    
+  }
+}

@@ -4,6 +4,7 @@ import API from '../../api/axios';
 import { useState } from 'react';
 import { AuthenticationProps, AuthenticationRes } from '../../types/types';
 import isEmail from 'validator/es/lib/isEmail';
+import { jwtDecode } from 'jwt-decode';
 
 
 export default function Authentication({
@@ -30,9 +31,11 @@ export default function Authentication({
       });
       
       if (res.data.isRegistered) {
-        navigate('/home');
         localStorage.setItem('isUser', JSON.stringify(true));
         localStorage.setItem('token', res.data.token);
+        const decodedToken: { id: string } = jwtDecode(res.data.token);
+        localStorage.setItem('userId', decodedToken.id);
+        navigate('/home');
       }
       
     } catch (error: any) {
@@ -49,9 +52,13 @@ export default function Authentication({
         password
       });
 
-      res.data.token && localStorage.setItem('token', res.data.token);
-      localStorage.setItem('isUser', JSON.stringify(true));
-      navigate('/home');
+      if (res.data.token) {
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('isUser', JSON.stringify(true));
+        const decodedToken: { id: string } = jwtDecode(res.data.token);
+        localStorage.setItem('userId', decodedToken.id);
+        navigate('/home');
+      }
     } catch (error: any) {
       handleErrorMessage(error.response?.data?.message);
     }
@@ -100,6 +107,13 @@ export default function Authentication({
             <label htmlFor="password">Password:</label>
             <input value={password} onChange={e => setPassword(e.currentTarget.value)} type="password" name="password" id="password" placeholder="Enter a strong MoorTube password" />
           </div>
+
+          {
+            layout === 'login' &&
+            <div>
+              <Link className="password-reset-link" to="/oneTimePasscode">Forgot password?</Link>
+            </div>
+          }
 
           <div>
             <button type="submit" className="register-btn">

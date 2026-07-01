@@ -48,3 +48,10 @@ export type VideosItem = {
 export type PlaylistInfoItem = {
   contentDetails: { videoId: string }
 }
+
+export type OTP = {
+  otp: string;
+  userId: mongoose.Types.ObjectId | string;
+  expireAt: Date;
+  attemps: number;
+}

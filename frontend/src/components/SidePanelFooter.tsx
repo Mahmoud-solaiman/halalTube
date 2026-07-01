@@ -2,8 +2,9 @@ import { Activity, useEffect, useRef, useState } from 'react';
 import './SidePanelFooter.scss';
 import { jwtDecode } from 'jwt-decode';
 import Settings from './Settings';
+import { SidePanelFooterProps } from '../types/types';
 
-export default function SidePanelFooter() {
+export default function SidePanelFooter({ setTranslate }: SidePanelFooterProps) {
   const [ isCopied, setIsCopied ] = useState<boolean>(false);
   const [ username, setUsername ] = useState<string>('');
   const [ isSettings, setIsSettings ] = useState<boolean>(false);
@@ -50,7 +51,11 @@ export default function SidePanelFooter() {
         </svg>
 
         <Activity mode={isSettings ? "visible" : "hidden"}>
-          <Settings setIsSettings={setIsSettings} settingsBtnRef={settingsBtnRef} />
+          <Settings 
+            setTranslate={setTranslate} 
+            setIsSettings={setIsSettings} 
+            settingsBtnRef={settingsBtnRef} 
+          />
         </Activity>
       </div>
     </footer>

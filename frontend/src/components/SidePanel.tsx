@@ -204,7 +204,7 @@ export function SidePanel({
         </section>
       </section>
 
-      <SidePanelFooter />
+      <SidePanelFooter setTranslate={setTranslate}/>
     </aside>
   );
 }

@@ -29,6 +29,7 @@ MoorTube is a video player that feeds from the YouTube API and is built with int
 ## 🏨 Repository Structure
 
 ```text
+├── /assets
 ├── /backend
 │   ├── /src
 │   │   ├── /config
